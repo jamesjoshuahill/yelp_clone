@@ -4,7 +4,7 @@ describe 'Restaurants' do
   
   describe 'form to add a new restaurant' do
 
-    it 'should create a new Restaurant' do
+    it 'should create a new restaurant' do
       visit new_restaurant_path
       
       expect(page).to have_css('h1', text: 'Add new restaurant')
@@ -48,6 +48,25 @@ describe 'Restaurants' do
       expect(current_url).to eq url_for(Restaurant.first)
       expect(page).to have_css('.name', text: 'New Restaurant')
       expect(page).to have_css('.description', text: 'Description for New Restaurant')
+    end
+
+    it 'should edit a restaurant' do
+      visit restaurants_path
+      within '.restaurants' do
+        click_link 'Another Restaurant'
+      end
+      click_link 'Edit this restaurant'
+
+      expect(page).to have_css('h1', 'Edit Another Restaurant')
+      within '.edit_restaurant' do
+        fill_in 'Name', with: 'Bar'
+        fill_in 'Description', with: 'Bar description'
+        click_button 'Edit restaurant'
+      end
+
+      expect(current_url).to eq url_for(Restaurant.last)
+      expect(page).to have_css('.name', text: 'Bar')
+      expect(page).to have_css('.description', text: 'Bar description')
     end
 
   end
