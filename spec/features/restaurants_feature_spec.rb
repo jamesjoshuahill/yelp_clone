@@ -51,10 +51,7 @@ describe 'Restaurants' do
     end
 
     it 'should edit a restaurant' do
-      visit restaurants_path
-      within '.restaurants' do
-        click_link 'Another Restaurant'
-      end
+      visit url_for(Restaurant.last)
       click_link 'Edit this restaurant'
 
       expect(page).to have_css('h1', 'Edit Another Restaurant')
@@ -67,6 +64,14 @@ describe 'Restaurants' do
       expect(current_url).to eq url_for(Restaurant.last)
       expect(page).to have_css('.name', text: 'Bar')
       expect(page).to have_css('.description', text: 'Bar description')
+    end
+
+    it 'should delete a restaurant' do
+      visit url_for(Restaurant.last)
+      click_link 'Delete this restaurant'
+
+      expect(current_path).to eq restaurants_path
+      expect(page).not_to have_css('.name', text: 'Another Restaurant')
     end
 
   end
