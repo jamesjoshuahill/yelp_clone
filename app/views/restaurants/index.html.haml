@@ -1,0 +1,5 @@
+%h1 All restaurants
+%ul.restaurants
+  - @restaurants.each do |restaurant|
+    %li
+      .name= link_to restaurant.name, restaurant_path(restaurant)
