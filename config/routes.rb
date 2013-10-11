@@ -1,7 +1,12 @@
 YelpClone::Application.routes.draw do
-  resources :reviews
 
-  resources :restaurants
+  resources :reviews, only: [:create]
+
+  resources :restaurants do
+    member do
+      get 'review'
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

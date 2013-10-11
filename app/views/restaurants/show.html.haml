@@ -6,4 +6,4 @@
       %span.comment= review.comment
       Rated:
       %span.rating= review.rating
-= link_to "Review this restaurant", { controller: 'reviews', action: 'new', :restaurant_id => @restaurant.id }
+= link_to "Review this restaurant", review_restaurant_path
