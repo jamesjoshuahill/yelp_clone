@@ -1,2 +1,9 @@
 %h1.name= @restaurant.name
 .description= @restaurant.description
+%ul.reviews
+  - @restaurant.reviews.each do |review|
+    %li
+      %span.comment= review.comment
+      Rated:
+      %span.rating= review.rating
+= link_to 'Review this restaurant', new_review_path
